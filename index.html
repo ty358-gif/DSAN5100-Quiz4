@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer pay: U.S. vs Canada vs Australia</title><style>
+:root{--bg:#fff;--fg:#1c1f26;--mut:#5b6270;--card:#f4f6fa;--line:#d9dde5}
+@media (prefers-color-scheme:dark){:root{--bg:#14171c;--fg:#e8eaee;--mut:#a3a9b5;--card:#1d2128;--line:#343a45}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 20px 60px}.tag{color:var(--mut);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:34px;line-height:1.2;margin:6px 0 10px}h2{font-size:21px;margin:34px 0 8px}.sub{color:var(--mut);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 14px 10px;margin:14px 0}.card h3{font-size:18px;margin:0 0 4px}
+.card p{margin:4px 0 8px;color:var(--mut);font-size:15px}svg{width:100%;height:auto;display:block}svg text{fill:var(--fg);font:13px sans-serif}
+#tip{position:absolute;display:none;pointer-events:none;background:#111;color:#fff;padding:7px 10px;border-radius:6px;font-size:13px;line-height:1.4;z-index:9}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--mut);margin:2px 0 6px}.lg i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:var(--mut);font-size:14px}a{color:#2563eb}</style></head><body><main>
+<div class="tag">Career Explorer · Developers in 2024</div>
+<h1>Thinking about working as a developer in the U.S., Canada or Australia? One pay gap stands out: about $58K.</h1>
+<p class="sub">Here’s what developers reported in the 2024 Stack Overflow Developer Survey. Hover or tap the charts for exact numbers.</p>
+<div class="card"><h3>U.S. developers report about $58K more per year than developers in Canada or Australia</h3>
+<p>Average annual compensation by country, with 95% confidence intervals (US$ thousands).</p><div id="c1"></div></div>
+<h2>What I found and why it matters</h2>
+<p>Among developers who reported a salary, the U.S. average was about <b>$157K</b> a year (median $145K), compared with about <b>$98K</b> in Canada (median $87K) and <b>$99K</b> in Australia (median $96K). The U.S. gap is roughly $57K–$59K, and statistical tests found it clearly larger than chance would explain. Canada and Australia, by contrast, were only about $2K apart, which the tests could not tell from zero. If you are comparing opportunities, this suggests the U.S. market is the outlier, but the numbers are a starting point, not an offer letter.</p>
+<div class="card"><h3>How people work also differs by country</h3>
+<p>Share of respondents who work remotely, hybrid or in person. The mix differs across the three countries (chi-square test, p &lt; 0.001); the chart shows how, not why.</p><div class="lg" id="lg"></div><div id="c2"></div></div>
+<h2>How I know, and what it does not tell us</h2>
+<p>I used 5,415 survey respondents in these three countries who reported an annual salary, compared the averages with Welch’s ANOVA (F(2, 1149) = 502, p &lt; 0.001), and used Games–Howell tests to see which countries differ. <b>Limitations:</b> (1) respondents chose to take the survey and many did not report pay, so they are not a random sample of all developers; (2) salaries are in US dollars with no cost-of-living adjustment, and a difference in average pay does not mean that moving to another country would cause a higher salary.</p>
+<footer>By <b>Tian Yang</b> · <a href="https://www.linkedin.com/in/tian-yang-a2073b449">LinkedIn</a><br>Data: Stack Overflow 2024 Developer Survey (ODbL). Project for DSAN 5100, Georgetown University M.S. in Data Science &amp; Analytics.</footer>
+</main><div id="tip"></div><script>
+const S=[{"c": "United States", "mean": 156.97, "lo": 154.68, "hi": 159.25, "med": 145.0, "n": 4168}, {"c": "Canada", "mean": 97.6, "lo": 93.87, "hi": 101.33, "med": 87.2, "n": 797}, {"c": "Australia", "mean": 99.49, "lo": 95.2, "hi": 103.78, "med": 95.8, "n": 450}],R=[{"c": "United States", "n": 4167, "v": [["Remote", 2238, 53.7], ["Hybrid (some remote, some in-person)", 1391, 33.4], ["In-person", 538, 12.9]]}, {"c": "Canada", "n": 795, "v": [["Remote", 436, 54.8], ["Hybrid (some remote, some in-person)", 284, 35.7], ["In-person", 75, 9.4]]}, {"c": "Australia", "n": 450, "v": [["Remote", 141, 31.3], ["Hybrid (some remote, some in-person)", 249, 55.3], ["In-person", 60, 13.3]]}],K=["#1d4ed8","#dc2626","#059669"],RC=["#0f766e","#f59e0b","#7c3aed"],tip=document.getElementById("tip");
+function show(e,h){tip.innerHTML=h;tip.style.display="block";const p=e.touches?e.touches[0]:e;tip.style.left=Math.min(p.pageX+12,innerWidth-200)+"px";tip.style.top=(p.pageY+14)+"px"}
+function hide(){tip.style.display="none"}
+function wire(id,items){document.querySelectorAll("#"+id+" [data-i]").forEach(el=>{const h=items[+el.dataset.i];["mousemove","touchstart"].forEach(ev=>el.addEventListener(ev,e=>show(e,h)));el.addEventListener("mouseleave",hide);el.addEventListener("touchend",()=>setTimeout(hide,1500))})}
+(function(){const W=640,L=130,PW=480,sc=v=>L+v/190*PW;let g="",tips=[];
+[0,50,100,150].forEach(v=>g+=`<line x1="${sc(v)}" x2="${sc(v)}" y1="8" y2="190" stroke="#8884" /><text x="${sc(v)}" y="208" text-anchor="middle">$${v}K</text>`);
+S.forEach((d,i)=>{const y=20+i*56;tips.push(`<b>${d.c}</b><br>Mean: $${d.mean.toFixed(1)}K<br>95% CI: $${d.lo.toFixed(1)}K–$${d.hi.toFixed(1)}K<br>Median: $${d.med.toFixed(1)}K<br>n = ${d.n.toLocaleString()}`);
+g+=`<text x="${L-8}" y="${y+22}" text-anchor="end">${d.c}</text><g data-i="${i}"><rect x="${L}" y="${y}" width="${sc(d.mean)-L}" height="40" rx="3" fill="${K[i]}"/><line x1="${sc(d.lo)}" x2="${sc(d.hi)}" y1="${y+20}" y2="${y+20}" stroke="#fff" stroke-width="2.5"/><line x1="${sc(d.lo)}" x2="${sc(d.lo)}" y1="${y+12}" y2="${y+28}" stroke="#fff" stroke-width="2.5"/><line x1="${sc(d.hi)}" x2="${sc(d.hi)}" y1="${y+12}" y2="${y+28}" stroke="#fff" stroke-width="2.5"/><rect x="${L}" y="${y}" width="${PW}" height="40" fill="transparent"/></g><text x="${sc(d.hi)+8}" y="${y+25}" font-weight="700">$${Math.round(d.mean)}K</text>`});
+g+=`<text x="${L+PW/2}" y="232" text-anchor="middle">Average annual compensation (US$ thousands)</text>`;
+document.getElementById("c1").innerHTML=`<svg viewBox="0 0 ${W} 240" role="img" aria-label="Bar chart: average salary US $157K, Canada $98K, Australia $99K">${g}</svg>`;wire("c1",tips)})();
+(function(){const L=130,PW=480;let g="",tips=[],k=0;
+document.getElementById("lg").innerHTML=R[0].v.map((v,i)=>`<span><i style="background:${RC[i]}"></i>${v[0]}</span>`).join("");
+R.forEach((d,i)=>{const y=14+i*52;g+=`<text x="${L-8}" y="${y+24}" text-anchor="end">${d.c}</text>`;let x=L;
+d.v.forEach((v,j)=>{const w=v[2]/100*PW;tips.push(`<b>${d.c}</b><br>${v[0]}: ${v[2]}% (${v[1].toLocaleString()} of ${d.n.toLocaleString()})`);
+g+=`<g data-i="${k++}"><rect x="${x}" y="${y}" width="${w}" height="38" fill="${RC[j]}"/>${v[2]>=9?`<text x="${x+w/2}" y="${y+24}" text-anchor="middle" style="fill:#fff;font-weight:700">${Math.round(v[2])}%</text>`:""}</g>`;x+=w})});
+g+=`<text x="${L+PW/2}" y="188" text-anchor="middle">Share of respondents (%)</text>`;
+document.getElementById("c2").innerHTML=`<svg viewBox="0 0 640 196" role="img" aria-label="Stacked bars of remote, hybrid and in-person work by country">${g}</svg>`;wire("c2",tips)})();
+</script></body></html>
